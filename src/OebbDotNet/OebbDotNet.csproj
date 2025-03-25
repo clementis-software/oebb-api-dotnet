@@ -4,6 +4,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>ÖBB Ticketing API Client</Title>
+    <Version>$(VersionPrefix)</Version>
+    <PackageProjectUrl>https://github.com/clementis-software/oebb-api-dotnet/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/clementis-software/oebb-api-dotnet/</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
