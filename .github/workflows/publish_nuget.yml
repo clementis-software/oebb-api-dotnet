@@ -22,15 +22,15 @@ jobs:
         dotnet-version: 9.0.x
     - name: Restore dependencies
       run: |
-        cd OebbDotNet
+        cd src/OebbDotNet
         dotnet restore
     - name: Build solution and generate NuGet package
       run: |  
-        cd OebbDotNet
+        cd src/OebbDotNet
         dotnet pack -c Release -o out
     - name: Publish nuget
       run: |
-        cd OebbDotNet
+        cd src/OebbDotNet
         foreach($file in (Get-ChildItem "out" -Recurse -Include *.nupkg)) {
             dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
         }
