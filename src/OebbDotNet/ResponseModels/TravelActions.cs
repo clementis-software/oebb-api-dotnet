@@ -5,9 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace OebbDotNet.ResponseModels;
 
-internal record TravelActionCollection(List<TravelActions> TravelActions);
+internal record TravelActionCollection(List<TravelAction> TravelActions);
 
-public record TravelActions(
+public record TravelAction(
     string Id,
     bool IsRemovable,
     Entrypoint Entrypoint,

@@ -26,7 +26,7 @@ namespace OebbDotNet
             return result;
         }
 
-        public async Task<TravelActions?> CreateTravelAction(Station from, Station to, DateTime dateTime)
+        public async Task<TravelAction?> CreateTravelActionAsync(Station from, Station to, DateTime dateTime)
         {
             await EnsureAccessTokenIsSet();
 
@@ -45,7 +45,7 @@ namespace OebbDotNet
             return travelAction;
         }
 
-        public async Task<IEnumerable<Connection>> GetConnections(TravelActions travelAction, List<Passenger> passengers, int results)
+        public async Task<IEnumerable<Connection>> GetConnectionsAsync(TravelAction travelAction, List<Passenger> passengers, int results)
         {
             TimetableRequest request = new TimetableRequest
             {
@@ -61,7 +61,7 @@ namespace OebbDotNet
             return result.Connections;
         }
 
-        public async Task<IEnumerable<Offer>> GetOffers(IEnumerable<Connection> connections)
+        public async Task<IEnumerable<Offer>> GetOffersAsync(IEnumerable<Connection> connections)
         {
             await EnsureAccessTokenIsSet();
             var result = await _ticketingApiClient.GetOffers(connections, _accessToken);

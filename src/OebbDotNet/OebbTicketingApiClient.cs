@@ -10,17 +10,11 @@ namespace OebbApiClient
     {
         public OebbTicketingApiClient() : base("https://shop.oebbtickets.at/api/")
         {
-            //HttpClient.DefaultRequestHeaders.Add("Host", "shop.oebbtickets.at");
         }
 
         public async Task<IEnumerable<Station>> QueryStations(string name, int count, Auth accessToken)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"hafas/v1/stations?name={name}&count={count}");
-            request.Headers.Add("AccessToken", accessToken.AccessToken);
-            request.Headers.Add("Host", "shop.oebbtickets.at");
-            
-            var response = await HttpClient.SendAsync(request);
-            return await response.Content.ReadFromJsonAsync<IEnumerable<Station>>();
+            return await GetAsync<IEnumerable<Station>>($"hafas/v1/stations?name={name}&count={count}", accessToken.AccessToken);
         }
 
         internal async Task<TravelActionCollection> CreateTravelAction(TravelActionsRequest travelActionsRequest, Auth apiToken)
@@ -30,7 +24,13 @@ namespace OebbApiClient
 
         internal async Task<OfferCollection> GetOffers(IEnumerable<Connection> connections, Auth accessToken)
         {
-            string url = "offer/v1/prices?" + connections.Select(x => "connectionIds[]="+x.Id).Aggregate((s1, s2) => s1 + "&" + s2) + "&sortType=DEPARTURE&bestPriceId=undefined";
+            if (!connections.Any())
+                return new OfferCollection(new List<Offer>());
+
+            var connectionIds = connections.Select(x => "connectionIds[]=" + x.Id);
+            string connectionIdsString = connectionIds.Count() == 1 ? connectionIds.First() : connectionIds.Aggregate((s1, s2) => s1 + "&" + s2);
+
+            string url = $"offer/v1/prices?{connectionIdsString}&sortType=DEPARTURE&bestPriceId=undefined";
 
             return await GetAsync<OfferCollection>(url, accessToken.AccessToken);
         }
