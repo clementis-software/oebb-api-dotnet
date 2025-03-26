@@ -16,6 +16,8 @@ var connections = await client.GetConnectionsAsync(travelAction, new List<Reques
 {
     new RequestModels.Passenger{ Id = 1742832923 }
 }, 5);
+
+var offers = await client.GetOffersAsync(connections);
 ```
 
 Notes:

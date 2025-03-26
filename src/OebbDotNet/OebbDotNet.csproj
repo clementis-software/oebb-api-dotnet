@@ -1,14 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>ÖBB Ticketing API Client</Title>
-    <Version>$(VersionPrefix)</Version>
-    <PackageProjectUrl>https://github.com/clementis-software/oebb-api-dotnet/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/clementis-software/oebb-api-dotnet/</RepositoryUrl>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>ÖBB Ticketing API Client</Title>
+		<Description>.NET Client library for Austrian Railways (ÖBB) API: Search stations, connections, offers</Description>
+		<PackageProjectUrl>https://github.com/clementis-software/oebb-api-dotnet/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/clementis-software/oebb-api-dotnet/</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Version>
+			0.1
+			.$([System.Math]::Floor($([MSBuild]::Divide($([System.DateTimeOffset]::UtcNow.ToUnixTimeSeconds()), 86400))))
+			.$([MSBuild]::Divide($([MSBuild]::Modulo($([System.DateTimeOffset]::UtcNow.ToUnixTimeSeconds()), 86400)), 2))
+		</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
