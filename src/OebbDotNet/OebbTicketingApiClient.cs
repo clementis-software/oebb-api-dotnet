@@ -4,7 +4,7 @@ using OebbDotNet.RequestModels;
 using OebbDotNet.ResponseModels;
 using System.Net.Http.Json;
 
-namespace OebbApiClient
+namespace OebbDotNet
 {
     internal class OebbTicketingApiClient : ApiClientBase
     {

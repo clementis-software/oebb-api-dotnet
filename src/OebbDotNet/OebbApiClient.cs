@@ -1,5 +1,4 @@
-﻿using OebbApiClient;
-using OebbDotNet.Models;
+﻿using OebbDotNet.Models;
 using OebbDotNet.RequestModels;
 using OebbDotNet.ResponseModels;
 using System;
